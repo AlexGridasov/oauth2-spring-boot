@@ -16,6 +16,10 @@
     <name>OAuth2 Spring Boot</name>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>resource-server</module>
+    </modules>
+
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
@@ -70,7 +74,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
     <build>
         <plugins>
