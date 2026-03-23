@@ -33,7 +33,7 @@ http://localhost:8081 - Resource Server
 # How to run
 
 1. Start Keycloak server in development mode using `kc.bat start-dev` command.
-2. Get `code` from Keycloak server by accessing the following URL in browser and login with `developer` user and password `X17*WnAiu44U#m` - `{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/auth?client_id=...&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=...` (`Get Code` API in Postman)
+2. Get `code` from Keycloak server by accessing the following URL in browser and login with `alex.developer` user and password `123qwe` - `{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/auth?client_id=...&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=...` (`Get Code` API in Postman)
 3. Exchange the `code` for `access_token` and `refresh_token` by accessing the following URL in Postman - `{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/token` (`Get Access Token` API in Postman)
 4. Run the Resource Server application using `mvn spring-boot:run` command
 5. Use the `access_token` (Authorization - Bearer Token) to access Resource Server API - `{{RESOURCE_SERVER}}/users/status/check` (`Users Status Check` API in Postman)
