@@ -1,0 +1,64 @@
+{
+  "info": {
+    "_postman_id": "74906613-f521-4c59-9131-eb2a534ff1d0",
+    "name": "OAuth-2-in-Spring-Boot",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "159245"
+  },
+  "item": [
+    {
+      "name": "resource-server",
+      "item": [
+        {
+          "name": "Users Status Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{RESOURCE_SERVER}}/users/status/check",
+              "host": [
+                "{{RESOURCE_SERVER}}"
+              ],
+              "path": [
+                "users",
+                "status",
+                "check"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "RESOURCE_SERVER",
+      "value": ""
+    }
+  ]
+}
