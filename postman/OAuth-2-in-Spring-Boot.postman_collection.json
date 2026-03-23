@@ -10,7 +10,7 @@
       "name": "resource-server",
       "item": [
         {
-          "name": "Users Status Check",
+          "name": "Get Users Status",
           "request": {
             "auth": {
               "type": "bearer",
@@ -33,6 +33,33 @@
                 "users",
                 "status",
                 "check"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{RESOURCE_SERVER}}/token",
+              "host": [
+                "{{RESOURCE_SERVER}}"
+              ],
+              "path": [
+                "token"
               ]
             }
           },
@@ -87,7 +114,7 @@
           "response": []
         },
         {
-          "name": "Get Token",
+          "name": "Get Access Token",
           "request": {
             "method": "POST",
             "header": [],
@@ -177,11 +204,11 @@
   ],
   "variable": [
     {
-      "key": "RESOURCE_SERVER",
+      "key": "BEARER_TOKEN",
       "value": ""
     },
     {
-      "key": "BEARER_TOKEN",
+      "key": "RESOURCE_SERVER",
       "value": ""
     },
     {
