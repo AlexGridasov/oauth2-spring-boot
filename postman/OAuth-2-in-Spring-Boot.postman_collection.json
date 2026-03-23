@@ -12,6 +12,16 @@
         {
           "name": "Users Status Check",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -23,6 +33,116 @@
                 "users",
                 "status",
                 "check"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "keycloak",
+      "item": [
+        {
+          "name": "Get Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/auth?client_id=photo-app-code-flow-client&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=asfwerwsdfwe",
+              "host": [
+                "{{KEYCLOAK_SERVER}}"
+              ],
+              "path": [
+                "realms",
+                "appsdeveloper",
+                "protocol",
+                "openid-connect",
+                "auth"
+              ],
+              "query": [
+                {
+                  "key": "client_id",
+                  "value": "photo-app-code-flow-client"
+                },
+                {
+                  "key": "response_type",
+                  "value": "code"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid profile"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://localhost:8083/callback"
+                },
+                {
+                  "key": "state",
+                  "value": "asfwerwsdfwe"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "type": "text",
+                  "uuid": "5927b21d-ef68-4151-ad16-3c2d2b79d5ae"
+                },
+                {
+                  "key": "client_id",
+                  "value": "photo-app-code-flow-client",
+                  "type": "text",
+                  "uuid": "d7669080-b80b-4cc6-aed9-49a66a0df61e"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "NyYDLZ2ZPRmy12io0cn4ZsQQNS56I4CG",
+                  "type": "text",
+                  "uuid": "b5115f5e-97f7-4a04-ae88-33b6f0030ba9"
+                },
+                {
+                  "key": "code",
+                  "value": "3bed1fde-7177-3a89-21ea-3917c27a459f.HnqUeYqyj3oq68zS_q1ZiFTh.a9c579bf-6818-449d-bf3c-0ff1e355a2b7",
+                  "type": "text",
+                  "uuid": "4d67776c-0078-47b8-87cd-9936e065958d"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://localhost:8083/callback",
+                  "type": "text",
+                  "uuid": "2e33e9f1-ef49-41f0-b196-d2673b73e1d8"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid profile",
+                  "type": "text",
+                  "uuid": "5a00d4f9-6c6d-47ad-820d-221550d36799"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/token",
+              "host": [
+                "{{KEYCLOAK_SERVER}}"
+              ],
+              "path": [
+                "realms",
+                "appsdeveloper",
+                "protocol",
+                "openid-connect",
+                "token"
               ]
             }
           },
@@ -58,6 +178,14 @@
   "variable": [
     {
       "key": "RESOURCE_SERVER",
+      "value": ""
+    },
+    {
+      "key": "BEARER_TOKEN",
+      "value": ""
+    },
+    {
+      "key": "KEYCLOAK_SERVER",
       "value": ""
     }
   ]
