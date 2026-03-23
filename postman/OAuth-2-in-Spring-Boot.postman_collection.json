@@ -7,71 +7,10 @@
   },
   "item": [
     {
-      "name": "resource-server",
-      "item": [
-        {
-          "name": "Get Users Status",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{BEARER_TOKEN}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{RESOURCE_SERVER}}/users/status/check",
-              "host": [
-                "{{RESOURCE_SERVER}}"
-              ],
-              "path": [
-                "users",
-                "status",
-                "check"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Token",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{BEARER_TOKEN}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{RESOURCE_SERVER}}/token",
-              "host": [
-                "{{RESOURCE_SERVER}}"
-              ],
-              "path": [
-                "token"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
       "name": "keycloak",
       "item": [
         {
-          "name": "Get Code",
+          "name": "Get Authorization Code",
           "request": {
             "method": "GET",
             "header": [],
@@ -201,6 +140,67 @@
                 "protocol",
                 "openid-connect",
                 "userinfo"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "resource-server",
+      "item": [
+        {
+          "name": "Get Users Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{RESOURCE_SERVER}}/users/status/check",
+              "host": [
+                "{{RESOURCE_SERVER}}"
+              ],
+              "path": [
+                "users",
+                "status",
+                "check"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{RESOURCE_SERVER}}/token",
+              "host": [
+                "{{RESOURCE_SERVER}}"
+              ],
+              "path": [
+                "token"
               ]
             }
           },
