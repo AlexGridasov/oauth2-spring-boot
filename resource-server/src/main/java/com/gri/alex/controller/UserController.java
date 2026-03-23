@@ -1,5 +1,7 @@
 package com.gri.alex.controller;
 
+import com.gri.alex.response.UserDto;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -24,5 +26,11 @@ public class UserController {
   @DeleteMapping(path = "/{id}")
   public String deleteUser(@PathVariable String id, @AuthenticationPrincipal Jwt jwt) {
     return String.format("Deleted user with id `%s` and JWT subject `%s`", id, jwt.getSubject());
+  }
+
+  @PostAuthorize("returnObject.userId == #jwt.subject")
+  @GetMapping(path = "/{id}")
+  public UserDto getUser(@PathVariable String id, @AuthenticationPrincipal Jwt jwt) {
+    return new UserDto(jwt.getClaim("given_name"), jwt.getClaim("family_name"), jwt.getSubject());
   }
 }
