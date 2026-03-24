@@ -275,6 +275,40 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "api-gateway",
+      "item": [
+        {
+          "name": "Get Users Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_GATEWAY}}/users/status/check",
+              "host": [
+                "{{API_GATEWAY}}"
+              ],
+              "path": [
+                "users",
+                "status",
+                "check"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "event": [
@@ -312,6 +346,10 @@
     },
     {
       "key": "KEYCLOAK_SERVER",
+      "value": ""
+    },
+    {
+      "key": "API_GATEWAY",
       "value": ""
     }
   ]

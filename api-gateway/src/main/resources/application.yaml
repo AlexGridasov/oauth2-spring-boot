@@ -1,2 +1,12 @@
 server:
   port: 8082
+
+spring:
+  cloud:
+    gateway:
+      routes[0]:
+        id: users-status-check
+        uri: http://localhost:8081
+        predicates[0]: Path=/users/status/check
+        predicates[1]: Method=GET
+        filters[0]: RemoveRequestHeader=Cookie
