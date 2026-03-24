@@ -309,6 +309,70 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "photos",
+      "item": [
+        {
+          "name": "Get Photos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{PHOTOS_SERVICE}}/photos",
+              "host": [
+                "{{PHOTOS_SERVICE}}"
+              ],
+              "path": [
+                "photos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "albums",
+      "item": [
+        {
+          "name": "Get Albums",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ALBUMS_SERVICE}}/albums",
+              "host": [
+                "{{ALBUMS_SERVICE}}"
+              ],
+              "path": [
+                "albums"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "event": [
@@ -341,15 +405,23 @@
       "value": ""
     },
     {
-      "key": "RESOURCE_SERVER",
+      "key": "RESOURCE_SERVICE",
       "value": ""
     },
     {
-      "key": "KEYCLOAK_SERVER",
+      "key": "KEYCLOAK_SERVICE",
       "value": ""
     },
     {
       "key": "API_GATEWAY",
+      "value": ""
+    },
+    {
+      "key": "PHOTOS_SERVICE",
+      "value": ""
+    },
+    {
+      "key": "ALBUMS_SERVICE",
       "value": ""
     }
   ]
