@@ -19,6 +19,7 @@
     <modules>
         <module>api-gateway</module>
         <module>resource-server</module>
+        <module>albums</module>
     </modules>
 
     <properties>
