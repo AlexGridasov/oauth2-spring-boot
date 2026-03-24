@@ -15,9 +15,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/auth?client_id=photo-app-code-flow-client&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=asfwerwsdfwe",
+              "raw": "{{KEYCLOAK_SERVICE}}/realms/appsdeveloper/protocol/openid-connect/auth?client_id=photo-app-code-flow-client&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=asfwerwsdfwe",
               "host": [
-                "{{KEYCLOAK_SERVER}}"
+                "{{KEYCLOAK_SERVICE}}"
               ],
               "path": [
                 "realms",
@@ -80,7 +80,7 @@
                 },
                 {
                   "key": "code",
-                  "value": "3bed1fde-7177-3a89-21ea-3917c27a459f.HnqUeYqyj3oq68zS_q1ZiFTh.a9c579bf-6818-449d-bf3c-0ff1e355a2b7",
+                  "value": "2b82cdcc-1fc4-4551-6286-75d2d3ec7a0e.su032S1K855PVyMT4VgKzqtL.a9c579bf-6818-449d-bf3c-0ff1e355a2b7",
                   "type": "text",
                   "uuid": "4d67776c-0078-47b8-87cd-9936e065958d"
                 },
@@ -99,9 +99,71 @@
               ]
             },
             "url": {
-              "raw": "{{KEYCLOAK_SERVER}}/realms/appsdeveloper/protocol/openid-connect/token",
+              "raw": "{{KEYCLOAK_SERVICE}}/realms/appsdeveloper/protocol/openid-connect/token",
               "host": [
-                "{{KEYCLOAK_SERVER}}"
+                "{{KEYCLOAK_SERVICE}}"
+              ],
+              "path": [
+                "realms",
+                "appsdeveloper",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Access Token - Password Grant Type",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "5927b21d-ef68-4151-ad16-3c2d2b79d5ae"
+                },
+                {
+                  "key": "username",
+                  "value": "alex.developer",
+                  "type": "text",
+                  "uuid": "a0362412-c98b-496b-8de5-21f817ef9591"
+                },
+                {
+                  "key": "password",
+                  "value": "123qwe",
+                  "type": "text",
+                  "uuid": "952de1d8-4459-44b1-a0c8-a6968b9ee243"
+                },
+                {
+                  "key": "client_id",
+                  "value": "photo-app-code-flow-client",
+                  "type": "text",
+                  "uuid": "d7669080-b80b-4cc6-aed9-49a66a0df61e"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "NyYDLZ2ZPRmy12io0cn4ZsQQNS56I4CG",
+                  "type": "text",
+                  "uuid": "b5115f5e-97f7-4a04-ae88-33b6f0030ba9"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid profile",
+                  "type": "text",
+                  "uuid": "5a00d4f9-6c6d-47ad-820d-221550d36799"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KEYCLOAK_SERVICE}}/realms/appsdeveloper/protocol/openid-connect/token",
+              "host": [
+                "{{KEYCLOAK_SERVICE}}"
               ],
               "path": [
                 "realms",
@@ -307,6 +369,60 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get Photos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_GATEWAY}}/photos",
+              "host": [
+                "{{API_GATEWAY}}"
+              ],
+              "path": [
+                "photos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Albums",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_GATEWAY}}/albums",
+              "host": [
+                "{{API_GATEWAY}}"
+              ],
+              "path": [
+                "albums"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -329,9 +445,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{PHOTOS_SERVICE}}/photos",
+              "raw": "{{API_GATEWAY}}/photos",
               "host": [
-                "{{PHOTOS_SERVICE}}"
+                "{{API_GATEWAY}}"
               ],
               "path": [
                 "photos"
