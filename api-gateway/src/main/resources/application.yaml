@@ -22,3 +22,8 @@ spring:
         predicates[0]: Path=/photos
         predicates[1]: Method=GET
         filters[0]: RemoveRequestHeader=Cookie
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8010/eureka
