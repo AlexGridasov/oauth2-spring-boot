@@ -1,0 +1,14 @@
+server:
+  port: 8010
+
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+
+logging:
+  level:
+    com:
+      netflix:
+        discovery: 'OFF'
+        eureka: 'OFF'
