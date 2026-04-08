@@ -8,3 +8,8 @@ spring:
         jwt:
           issuer-uri: http://localhost:8070/realms/appsdeveloper
 #          jwk-set-uri: http://localhost:8070/realms/appsdeveloper/protocol/openid-connect/certs
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8010/eureka
