@@ -22,6 +22,7 @@
         <module>resource-server</module>
         <module>albums</module>
         <module>photos</module>
+        <module>photo-web-client</module>
     </modules>
 
     <properties>
