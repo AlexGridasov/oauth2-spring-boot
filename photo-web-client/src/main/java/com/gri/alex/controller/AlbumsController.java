@@ -2,6 +2,11 @@ package com.gri.alex.controller;
 
 import com.gri.alex.dto.AlbumDto;
 import java.util.List;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,14 +18,18 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class AlbumsController {
 
-  OAuth2AuthorizedClientService oauth2ClientService;
+  private final OAuth2AuthorizedClientService oauth2ClientService;
+  private final RestTemplate restTemplate;
 
-  public AlbumsController(OAuth2AuthorizedClientService oauth2ClientService) {
+  public AlbumsController(OAuth2AuthorizedClientService oauth2ClientService,
+                          RestTemplate restTemplate) {
     this.oauth2ClientService = oauth2ClientService;
+    this.restTemplate = restTemplate;
   }
 
   @GetMapping("/albums")
@@ -42,17 +51,17 @@ public class AlbumsController {
     String tokenValue = idToken.getTokenValue();
     System.out.println("-> ID Token: " + tokenValue);
 
-    AlbumDto album1 = new AlbumDto();
-    album1.setAlbumId("1");
-    album1.setAlbumTitle("Album 1");
-    album1.setAlbumUrl("http://localhost:8082/albums/1");
 
-    AlbumDto album2 = new AlbumDto();
-    album2.setAlbumId("2");
-    album2.setAlbumTitle("Album 2");
-    album2.setAlbumUrl("http://localhost:8082/albums/2");
+    ResponseEntity<List<AlbumDto>> responseEntity = restTemplate.exchange(
+        "http://localhost:8082/albums",
+        HttpMethod.GET,
+        new HttpEntity<>(new HttpHeaders() {{
+          setBearerAuth(jwtAccessToken);
+        }}),
+        new ParameterizedTypeReference<>() {}
+    );
 
-    model.addAttribute("albums", List.of(album1, album2));
+    model.addAttribute("albums", responseEntity.getBody());
 
     return "albums";
   }

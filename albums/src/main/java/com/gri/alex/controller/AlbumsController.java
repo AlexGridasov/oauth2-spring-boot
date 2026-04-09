@@ -14,15 +14,15 @@ public class AlbumsController {
   @GetMapping
   public List<AlbumsDto> getAlbums() {
     AlbumsDto album1 = new AlbumsDto();
-    album1.setAlbumId("albumIdHere");
-    album1.setUserId("1");
+    album1.setAlbumId("1");
+    album1.setUserId("101");
     album1.setAlbumTitle("Album 1 title");
     album1.setAlbumDescription("Album 1 description");
     album1.setAlbumUrl("Album 1 URL");
 
     AlbumsDto album2 = new AlbumsDto();
-    album2.setAlbumId("albumIdHere");
-    album2.setUserId("2");
+    album2.setAlbumId("2");
+    album2.setUserId("102");
     album2.setAlbumTitle("Album 2 title");
     album2.setAlbumDescription("Album 2 description");
     album2.setAlbumUrl("Album 2 URL");
