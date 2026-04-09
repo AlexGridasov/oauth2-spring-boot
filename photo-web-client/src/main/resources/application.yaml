@@ -1,2 +1,14 @@
 server:
   port: 8087
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          photowebclient:
+            redirect-uri: http://localhost:8087/login/oauth2/code/photowebclient
+            scope: openid, profile, roles
+            client-secret: gXQNlKcq7Y0OYdM2l55goK4noZUvMyX3
+            client-id: photo-web-client
+            authorization-grant-type: authorization_code
