@@ -1,6 +1,7 @@
 package com.gri.alex.controller;
 
 import com.gri.alex.response.UserDto;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,9 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
+  Environment env;
+
+  public UserController(Environment env) {
+    this.env = env;
+  }
+
   @GetMapping("/status/check")
   public String status() {
-    return "Working ...";
+    return "Working on port: " + env.getProperty("local.server.port");
   }
 
   @PreAuthorize("hasAuthority('ROLE_developer') or #id == #jwt.subject")
