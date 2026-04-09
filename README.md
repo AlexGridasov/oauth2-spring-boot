@@ -28,6 +28,7 @@ Learn to secure Spring Boot applications with the OAuth 2.0 Stack in Spring Secu
 
 http://localhost:8070 - Keycloak Admin Console
 http://localhost:8081 - Resource Server
+http://localhost:8087 - Photo Web Application
 
 
 # How to run
