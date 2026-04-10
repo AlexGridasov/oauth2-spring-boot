@@ -23,6 +23,7 @@
         <module>albums</module>
         <module>photos</module>
         <module>photo-web-client</module>
+        <module>social-login-web-client</module>
     </modules>
 
     <properties>
