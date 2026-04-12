@@ -24,6 +24,7 @@
         <module>photos</module>
         <module>photo-web-client</module>
         <module>social-login-web-client</module>
+        <module>spa-example</module>
     </modules>
 
     <properties>
