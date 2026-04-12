@@ -19,6 +19,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+.mvn
 
 # Log file
 *.log

@@ -61,6 +61,25 @@
 
         window.open(authorizationURL, 'authorizationRequestWindow', 'width=800,height=600,left=200,top=200');
     }
+
+    /**
+     * This method is called by the authcodeReader.html page after the authorization server redirects to it with
+     * the authorization code and state value as query parameters. The method checks if the state value received from
+     * the authcodeReader.html page is the same as the one generated in this page.
+     * If they are the same, it calls the requestTokens() method to exchange the authorization code
+     * for access and refresh tokens.
+     * If they are not the same, it shows an alert indicating that an invalid state value was received.
+     */
+    function postAuthorize(state, authCode) {
+        alert("State: " + state + ", authCode: " + authCode);
+        var originalStateValue = document.getElementById("stateValue").innerHTML;
+
+        if(state === originalStateValue) {
+            // requestTokens(authCode);
+        } else {
+            alert("Invalid state value received");
+        }
+    }
 </script>
 </head>
 
