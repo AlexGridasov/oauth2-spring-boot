@@ -13,6 +13,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
         .antMatchers("/").permitAll()
         .anyRequest().authenticated()
-        .and().oauth2Login();
+        .and().oauth2Login()
+        .and().logout()
+        .logoutSuccessUrl("/")
+        .invalidateHttpSession(true)
+        .clearAuthentication(true)
+        .deleteCookies("JSESSIONID");
   }
 }
