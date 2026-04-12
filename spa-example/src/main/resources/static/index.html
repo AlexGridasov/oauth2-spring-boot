@@ -22,7 +22,9 @@
         var randomByteArray = new Uint8Array(32);
         window.crypto.getRandomValues(randomByteArray);
 
-        document.getElementById("codeVerifierValue").innerHTML = base64UrlEncode(randomByteArray);
+        var codeVerifierValue = base64UrlEncode(randomByteArray);
+
+        document.getElementById("codeVerifierValue").innerHTML = codeVerifierValue;
     }
 
     function base64UrlEncode(sourceValue) {
@@ -30,6 +32,18 @@
         var base64Encoded = btoa(stringValue);
 
         return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    }
+
+    async function generateCodeChallenge() {
+        var codeVerifier = document.getElementById("codeVerifierValue").innerHTML;
+
+        var textEncoder = new TextEncoder('US-ASCII');
+        var encodedValue = textEncoder.encode(codeVerifier);
+        var digest = await window.crypto.subtle.digest("SHA-256", encodedValue);
+
+        var codeChallengeValue = base64UrlEncode(Array.from(new Uint8Array(digest)));
+
+        document.getElementById("codeChallengeValue").innerHTML = codeChallengeValue;
     }
 </script>
 </head>
@@ -39,9 +53,12 @@
 
 <div id="stateValue"></div>
 <div><input type="button" value="Generate state value" onclick="generateState(30)"/></div>
-
+<br/>
 <div id="codeVerifierValue"></div>
 <div><input type="button" value="Generate Code Verifier value" onclick="generateCodeVerifier()"/></div>
+<br/>
+<div id="codeChallengeValue"></div>
+<div><input type="button" value="Generate Code Challenge value" onclick="generateCodeChallenge()"/></div>
 
 </body>
 </html>
