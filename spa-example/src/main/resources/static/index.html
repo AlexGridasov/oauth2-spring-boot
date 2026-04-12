@@ -10,11 +10,26 @@
         var stateValue = "";
         var alphaNumericCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var alphaNumericCharactersLength = alphaNumericCharacters.length;
+
         for (var i = 0; i < length; i++) {
             stateValue += alphaNumericCharacters.charAt(Math.floor(Math.random() * alphaNumericCharactersLength));
         }
 
         document.getElementById("stateValue").innerHTML = stateValue;
+    }
+
+    function generateCodeVerifier() {
+        var randomByteArray = new Uint8Array(32);
+        window.crypto.getRandomValues(randomByteArray);
+
+        document.getElementById("codeVerifierValue").innerHTML = base64UrlEncode(randomByteArray);
+    }
+
+    function base64UrlEncode(sourceValue) {
+        var stringValue = String.fromCharCode.apply(null, sourceValue);
+        var base64Encoded = btoa(stringValue);
+
+        return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
     }
 </script>
 </head>
@@ -24,6 +39,9 @@
 
 <div id="stateValue"></div>
 <div><input type="button" value="Generate state value" onclick="generateState(30)"/></div>
+
+<div id="codeVerifierValue"></div>
+<div><input type="button" value="Generate Code Verifier value" onclick="generateCodeVerifier()"/></div>
 
 </body>
 </html>
