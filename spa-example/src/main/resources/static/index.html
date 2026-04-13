@@ -106,6 +106,25 @@
     function postRequestAccessToken(data, status, jqXHR) {
         document.getElementById("accessToken").innerHTML = data["access_token"];
     }
+
+    function getInfoFromResourceServer(){
+        var accessToken = document.getElementById("accessToken").innerHTML;
+
+        $.ajax({
+            beforeSend: function (request) {
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+                request.setRequestHeader("Authorization", "Bearer " + accessToken);
+            },
+            type: "GET",
+            url: "http://localhost:8082/users/status/check",
+            success: postInfoFromAccessToken,
+            dataType: "text"
+        });
+    }
+
+    function postInfoFromAccessToken(data, status, jqXHR) {
+        alert(data);
+    }
 </script>
 </head>
 
@@ -125,5 +144,6 @@
 <br/>
 <p>Access token: <span id="accessToken"></span></p>
 <br/>
+<div><input type="button" value="Load Users Status" onclick="getInfoFromResourceServer()"/></div>
 </body>
 </html>
