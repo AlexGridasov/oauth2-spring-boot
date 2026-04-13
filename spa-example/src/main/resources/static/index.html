@@ -63,22 +63,48 @@
     }
 
     /**
-     * This method is called by the authcodeReader.html page after the authorization server redirects to it with
-     * the authorization code and state value as query parameters. The method checks if the state value received from
-     * the authcodeReader.html page is the same as the one generated in this page.
-     * If they are the same, it calls the requestTokens() method to exchange the authorization code
+     * This method is called by the `authcodeReader.html` page after the authorization server redirects to it with
+     * the `authorization code` and `state` value as query parameters. The method checks if the state value received
+     * from the `authcodeReader.html` page is the same as the one generated in this page.
+     * If they are the same, it calls the `requestTokens()` method to exchange the authorization code
      * for access and refresh tokens.
      * If they are not the same, it shows an alert indicating that an invalid state value was received.
      */
     function postAuthorize(state, authCode) {
-        alert("State: " + state + ", authCode: " + authCode);
         var originalStateValue = document.getElementById("stateValue").innerHTML;
 
         if(state === originalStateValue) {
-            // requestTokens(authCode);
+            requestTokens(authCode);
         } else {
             alert("Invalid state value received");
         }
+    }
+
+    function requestTokens(authCode) {
+        console.log("authCode: " + authCode);
+        var codeVerifier = document.getElementById("codeVerifierValue").innerHTML;
+        var data = {
+            "grant_type": "authorization_code",
+            "client_id": "photo-app-PKCE-client",
+            "code": authCode,
+            "code_verifier": codeVerifier,
+            "redirect_uri":"http://localhost:8081/authcodeReader.html"
+        };
+
+        $.ajax({
+            beforeSend: function (request) {
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+            },
+            type: "POST",
+            url: "http://localhost:8070/realms/appsdeveloper/protocol/openid-connect/token",
+            data: data,
+            success: postRequestAccessToken,
+            dataType: "json"
+        });
+    }
+
+    function postRequestAccessToken(data, status, jqXHR) {
+        document.getElementById("accessToken").innerHTML = data["access_token"];
     }
 </script>
 </head>
@@ -96,6 +122,8 @@
 <div><input type="button" value="Generate Code Challenge value" onclick="generateCodeChallenge()"/></div>
 <br/>
 <div><input type="button" value="Get Auth Code" onclick="getAuthCode()"/></div>
-
+<br/>
+<p>Access token: <span id="accessToken"></span></p>
+<br/>
 </body>
 </html>
