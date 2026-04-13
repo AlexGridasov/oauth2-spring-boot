@@ -1,11 +1,17 @@
 package com.gri.alex.security;
 
+import java.util.List;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
 @EnableWebSecurity
@@ -16,7 +22,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     JwtAuthenticationConverter authConverter = new JwtAuthenticationConverter();
     authConverter.setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
 
-    http
+    http.cors().and()
         .authorizeRequests()
           .antMatchers(HttpMethod.GET, "/users/status/check")
           // .hasAuthority("SCOPE_profile")
@@ -26,6 +32,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         .oauth2ResourceServer()
         .jwt()
         .jwtAuthenticationConverter(authConverter);
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
+    corsConfiguration.setAllowedOrigins(List.of("*"));
+    corsConfiguration.setAllowedMethods(List.of("GET","POST"));
+    corsConfiguration.setAllowedHeaders(List.of("*"));
+
+    UrlBasedCorsConfigurationSource urlBasedCorsSource = new UrlBasedCorsConfigurationSource();
+    urlBasedCorsSource.registerCorsConfiguration("/**", corsConfiguration);
+
+    return urlBasedCorsSource;
   }
 
 }
