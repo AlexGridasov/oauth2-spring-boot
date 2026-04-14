@@ -1,5 +1,6 @@
 package com.gri.alex.provider;
 
+import com.gri.alex.api.UserApiService;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialInputValidator;
@@ -14,10 +15,12 @@ public class RemoteUserStorageProvider
 
   private KeycloakSession session;
   private ComponentModel model;
+  private UserApiService userService;
 
-  public RemoteUserStorageProvider(KeycloakSession session, ComponentModel model) {
+  public RemoteUserStorageProvider(KeycloakSession session, ComponentModel model, UserApiService userService) {
     this.session = session;
     this.model = model;
+    this.userService = userService;
   }
 
   @Override
