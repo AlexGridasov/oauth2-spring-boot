@@ -1,5 +1,6 @@
 package com.gri.alex.provider;
 
+import com.gri.alex.api.User;
 import com.gri.alex.api.UserApiService;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;
@@ -8,6 +9,7 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.storage.UserStorageProvider;
+import org.keycloak.storage.adapter.AbstractUserAdapter;
 import org.keycloak.storage.user.UserLookupProvider;
 
 public class RemoteUserStorageProvider
@@ -35,7 +37,23 @@ public class RemoteUserStorageProvider
 
   @Override
   public UserModel getUserByUsername(String username, RealmModel realm) {
-    return null;
+    UserModel userModel = null;
+    User user = userService.getUserDetails(username);
+
+    if (user != null) {
+      userModel = createUserModel(username, realm);
+    }
+
+    return userModel;
+  }
+
+  private UserModel createUserModel(String username, RealmModel realm) {
+    return new AbstractUserAdapter(session, realm, model) {
+      @Override
+      public String getUsername() {
+        return username;
+      }
+    };
   }
 
   @Override
