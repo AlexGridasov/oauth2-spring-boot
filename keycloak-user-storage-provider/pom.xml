@@ -48,4 +48,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>demo-remote-user-storage-provider</finalName>
+    </build>
 </project>
