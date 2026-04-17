@@ -1,3 +1,5 @@
+# Building and Deploying a Custom User Storage Provider in Keycloak (Quarkus)
+
 1. Build and Package
 
 Compile your code and package it into a JAR file. Ensure you include necessary dependencies like `keycloak-server-spi` in your `pom.xml` or `build.gradle` as "provided" dependencies. 
@@ -17,7 +19,7 @@ bin/kc.bat build
 ```terminal
 bin/kc.bat show-config
 ```
-
+ 
 4. **Start Server**: Launch Keycloak:
 
 ```terminal
@@ -33,3 +35,10 @@ Once the server is running with the new provider:
 3. Navigate to **User Federation** in the left menu.
 4. Click **Add provider** and select your provider (the name corresponds to the `getId()` method in your factory).
 5. Configure any required settings and click **Save**.
+
+# Testing
+
+- Start `legacy-user-web-service`
+- Start Keycloak with the new provider.
+- Send request in browser `http://localhost:8070/realms/appsdeveloper/protocol/openid-connect/auth?client_id=photo-app-code-flow-client&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=asfwerwsdfwe`
+- Login with credentials from `legacy-user-web-service` (InitialSetup.java).

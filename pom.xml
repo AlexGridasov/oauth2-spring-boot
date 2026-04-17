@@ -26,6 +26,7 @@
         <module>social-login-web-client</module>
         <module>spa-example</module>
         <module>keycloak-user-storage-provider</module>
+        <module>legacy-user-web-service</module>
     </modules>
 
     <properties>
